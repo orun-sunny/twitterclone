@@ -1,0 +1,12 @@
+H:\astha it\twitterclone\TwitterClone.domain\bin\Debug\net10.0\TwitterClone.domain.deps.json
+H:\astha it\twitterclone\TwitterClone.domain\bin\Debug\net10.0\TwitterClone.domain.dll
+H:\astha it\twitterclone\TwitterClone.domain\bin\Debug\net10.0\TwitterClone.domain.pdb
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.GeneratedMSBuildEditorConfig.editorconfig
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.AssemblyInfoInputs.cache
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.AssemblyInfo.cs
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.csproj.CoreCompileInputs.cache
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.sourcelink.json
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.dll
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\refint\TwitterClone.domain.dll
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\TwitterClone.domain.pdb
+H:\astha it\twitterclone\TwitterClone.domain\obj\Debug\net10.0\ref\TwitterClone.domain.dll
