@@ -1,4 +1,4 @@
-namespace TwitterClone.Domain.Entities
+﻿namespace TwitterClone.Domain.Entities
 {
     public class User : BaseEntity, IFollowable, INotifiable
     {
@@ -42,7 +42,7 @@ namespace TwitterClone.Domain.Entities
 
         public void Follow(Guid userId)
         {
-            if (!_followers.Contains(userId))
+            if(!_followers.Contains(userId))
             {
                 _followers.Add(userId);
             }
@@ -50,7 +50,7 @@ namespace TwitterClone.Domain.Entities
 
         public void Unfollow(Guid userId)
         {
-            if (_followers.Contains(userId))
+            if(_followers.Contains(userId))
             {
                 _followers.Remove(userId);
             }
@@ -58,7 +58,7 @@ namespace TwitterClone.Domain.Entities
 
         public void AddNotification(Guid notificationId)
         {
-            if (!_inComingNotifications.Contains(notificationId))
+            if(!_inComingNotifications.Contains(notificationId))
             {
                 _inComingNotifications.Add(notificationId);
             }

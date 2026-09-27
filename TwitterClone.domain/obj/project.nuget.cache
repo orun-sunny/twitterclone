@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "8P1uG/cU020=",
+  "dgSpecHash": "fnjBjI2rB+o=",
   "success": true,
-  "projectFilePath": "H:\\astha it\\twitterclone\\TwitterClone.domain\\TwitterClone.domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "H:\\astha it\\twitterclone\\TwitterClone.Domain\\TwitterClone.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SUNNY\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.22\\microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\SUNNY\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.22\\microsoft.windowsdesktop.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\SUNNY\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.22\\microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -6,13 +6,13 @@ namespace TwitterClone.Domain.Entities
         private string _type;
         private string _message;
         private bool _isRead;
-
+        
 
         public Notification(string notificationType) : base(Guid.NewGuid())
         {
             _type = notificationType;
         }
-
+       
 
         public Guid UserId
         {

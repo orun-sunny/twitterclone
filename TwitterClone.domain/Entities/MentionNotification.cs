@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace TwitterClone.Domain.Entities
         }
         public Guid MentionedByUserId { get; set; }
 
-
+        
         public override string DescribeRecord()
         {
             var baseRecord = base.DescribeRecord();
