@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
+    "net9.0": {
       "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
         "type": "package",
         "build": {
@@ -88,6 +88,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "TwitterClone.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/TwitterClone.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TwitterClone.Domain.dll": {}
+        }
       }
     }
   },
@@ -439,11 +449,17 @@
         "swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "TwitterClone.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TwitterClone.Domain/TwitterClone.Domain.csproj",
+      "msbuildProject": "../TwitterClone.Domain/TwitterClone.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
-      "Swashbuckle.AspNetCore >= 6.6.2"
+    "net9.0": [
+      "Swashbuckle.AspNetCore >= 6.6.2",
+      "TwitterClone.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -462,15 +478,19 @@
         "C:\\Users\\SUNNY\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "projectReferences": {}
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "H:\\astha it\\twitterclone\\TwitterClone.Domain\\TwitterClone.Domain.csproj": {
+              "projectPath": "H:\\astha it\\twitterclone\\TwitterClone.Domain\\TwitterClone.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -486,8 +506,8 @@
       "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "dependencies": {
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -508,19 +528,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.22, 8.0.22]"
+            "version": "[9.0.11, 9.0.11]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.22, 8.0.22]"
+            "version": "[9.0.11, 9.0.11]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.22, 8.0.22]"
+            "version": "[9.0.11, 9.0.11]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.22, 8.0.22]"
+            "version": "[9.0.11, 9.0.11]"
           }
         ],
         "frameworkReferences": {

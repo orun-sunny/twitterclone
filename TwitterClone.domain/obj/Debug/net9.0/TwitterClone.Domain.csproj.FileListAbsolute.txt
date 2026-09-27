@@ -1,0 +1,12 @@
+H:\astha it\twitterclone\TwitterClone.Domain\bin\Debug\net9.0\TwitterClone.Domain.deps.json
+H:\astha it\twitterclone\TwitterClone.Domain\bin\Debug\net9.0\TwitterClone.Domain.dll
+H:\astha it\twitterclone\TwitterClone.Domain\bin\Debug\net9.0\TwitterClone.Domain.pdb
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.GeneratedMSBuildEditorConfig.editorconfig
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.AssemblyInfoInputs.cache
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.AssemblyInfo.cs
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.csproj.CoreCompileInputs.cache
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.sourcelink.json
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.dll
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\refint\TwitterClone.Domain.dll
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\TwitterClone.Domain.pdb
+H:\astha it\twitterclone\TwitterClone.Domain\obj\Debug\net9.0\ref\TwitterClone.Domain.dll
