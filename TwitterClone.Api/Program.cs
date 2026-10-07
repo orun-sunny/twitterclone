@@ -7,13 +7,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
+
 builder.Services.AddDbContext<TwitterCloneDbContext>(options =>
-options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddSingleton<UserRepository>();
 builder.Services.AddSingleton<TweetRepository>();
 
 var app = builder.Build();
+
+PostgresDatabase.EnsureDatabaseExists(connectionString);
 
 using (var scope = app.Services.CreateScope())
 {
