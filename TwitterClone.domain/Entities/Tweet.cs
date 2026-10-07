@@ -12,7 +12,11 @@ namespace TwitterClone.Domain.Entities
         private string _content;
 
         public static int MaxContentLength = 200;
-        
+
+        private Tweet() : base(Guid.NewGuid())
+        {
+            _content = string.Empty;
+        }
 
         public Tweet(string content) : base(Guid.NewGuid())
         {
