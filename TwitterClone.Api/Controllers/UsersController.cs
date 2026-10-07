@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TwitterClone.Api.Data;
+using TwitterClone.Api.Dtos;
+using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Api.Controllers
 {
@@ -10,39 +13,58 @@ namespace TwitterClone.Api.Controllers
     [Authorize]
     public class UsersController : ControllerBase
     {
+        public readonly UserRepository _userRepository;
 
-        public UsersController() { }
+        public UsersController(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
 
         // /api/users
         [HttpGet]
         public IActionResult GetUsers()
         {
-            return Ok(new List<object>
+            var users = _userRepository.GetUser();
+            var userDtos = users.Select(user => new
             {
-                new
-                {
-                    UserId = Guid.NewGuid(),
-                    UserName = "user1",
-                },
-                new
-                {
-                    UserId = Guid.NewGuid(),
-                    UserName = "user2",
-                },
-            });
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email
+            }).ToList();
+
+            return Ok(userDtos);
         }
 
         // /api/users
+        // /api/users
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult CreateUser()
+        public IActionResult CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            return Ok(new
+            if (string.IsNullOrWhiteSpace(createUserDto.FirstName) ||
+                 string.IsNullOrWhiteSpace(createUserDto.LastName) ||
+                  string.IsNullOrWhiteSpace(createUserDto.Email))
             {
-                UserId = Guid.NewGuid(),
-                UserName = "newuser",
+                return BadRequest("All feilds are required");
+            }
+            ;
+
+            var existingUser = _userRepository.GetUserByEmail(createUserDto.Email);
+            if (existingUser != null)
+            {
+                return BadRequest("A user with this email already exist");
+            }
+
+            var createUser = _userRepository.AddUser(new User
+            {
+                FirstName = createUserDto.FirstName,
+                LastName = createUserDto.LastName,
+                Email = createUserDto.Email
             });
+
+            return Ok(createUser);
         }
 
 

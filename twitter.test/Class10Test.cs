@@ -7,7 +7,7 @@ using TwitterClone.Domain.Entities;
 
 namespace Twitter.Test
 {
-    public class Class10Test
+    public class Class10test
     {
         public void Run()
         {
@@ -15,7 +15,7 @@ namespace Twitter.Test
 
             Console.WriteLine(likeableTweet.CanBeLiked());
 
-            var maxTweetLength = 200;
+
         }
     }
 }
