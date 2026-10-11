@@ -11,6 +11,7 @@
         private string _firstName;
         private string _lastName;
         private string _email;
+        private string? _phoneNumber;
 
 
         public string FirstName
@@ -29,6 +30,13 @@
         {
             get { return _email; }
             set { _email = value; }
+
+        }
+
+        public string? PhoneNumber
+        {
+            get { return _phoneNumber; }
+            set { _phoneNumber = value; }
         }
 
         private List<Guid> _followers = new List<Guid>();
@@ -42,7 +50,7 @@
 
         public void Follow(Guid userId)
         {
-            if(!_followers.Contains(userId))
+            if (!_followers.Contains(userId))
             {
                 _followers.Add(userId);
             }
@@ -50,7 +58,7 @@
 
         public void Unfollow(Guid userId)
         {
-            if(_followers.Contains(userId))
+            if (_followers.Contains(userId))
             {
                 _followers.Remove(userId);
             }
@@ -58,7 +66,7 @@
 
         public void AddNotification(Guid notificationId)
         {
-            if(!_inComingNotifications.Contains(notificationId))
+            if (!_inComingNotifications.Contains(notificationId))
             {
                 _inComingNotifications.Add(notificationId);
             }

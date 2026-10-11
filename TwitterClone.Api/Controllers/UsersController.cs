@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TwitterClone.Api.Data;
-using TwitterClone.Api.Dtos;
+using TwitterClone.Application.Dtos;
+using TwitterClone.Application.Interfaces;
 using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Api.Controllers
@@ -13,28 +14,20 @@ namespace TwitterClone.Api.Controllers
     [Authorize]
     public class UsersController : ControllerBase
     {
-        public readonly UserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UsersController(UserRepository userRepository)
+        public UsersController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
+
 
 
         // /api/users
         [HttpGet]
         public IActionResult GetUsers()
         {
-            var users = _userRepository.GetUser();
-            var userDtos = users.Select(user => new
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email
-            }).ToList();
-
-            return Ok(userDtos);
+            return Ok(_userService.GetUsers());
         }
 
         // /api/users
@@ -43,28 +36,12 @@ namespace TwitterClone.Api.Controllers
         [AllowAnonymous]
         public IActionResult CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            if (string.IsNullOrWhiteSpace(createUserDto.FirstName) ||
-                 string.IsNullOrWhiteSpace(createUserDto.LastName) ||
-                  string.IsNullOrWhiteSpace(createUserDto.Email))
+            var createdUser = _userService.CreateUser(createUserDto);
+            if (createdUser == null)
             {
-                return BadRequest("All feilds are required");
+                return BadRequest("Invalid user data or user already exists.");
             }
-            ;
-
-            var existingUser = _userRepository.GetUserByEmail(createUserDto.Email);
-            if (existingUser != null)
-            {
-                return BadRequest("A user with this email already exist");
-            }
-
-            var createUser = _userRepository.AddUser(new User
-            {
-                FirstName = createUserDto.FirstName,
-                LastName = createUserDto.LastName,
-                Email = createUserDto.Email
-            });
-
-            return Ok(createUser);
+            return Ok(createdUser);
         }
 
 
@@ -72,23 +49,25 @@ namespace TwitterClone.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult GetUserById([FromRoute] Guid id)
         {
-            return Ok(new
+            var user = _userService.GetUserById(id);
+            if (user == null)
             {
-                UserId = id,
-                UserName = "user" + id.ToString(),
-            });
+                return NotFound("User not found.");
+            }
+            return Ok(user);
         }
 
 
         // PUT /api/users/{id}
         [HttpPut("{id}")]
-        public IActionResult UpdateUser([FromRoute] Guid id)
+        public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserDto updateUserDto)
         {
-            return Ok(new
+            var user = _userService.UpdateUser(id, updateUserDto);
+            if (user == null)
             {
-                UserId = id,
-                UserName = "updateduser" + id.ToString(),
-            });
+                return NotFound("User not found.");
+            }
+            return Ok(user);
         }
 
 
@@ -104,11 +83,12 @@ namespace TwitterClone.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUser([FromRoute] Guid id)
         {
-            return Ok(new
+            var isDeleted = _userService.DeleteUser(id);
+            if (!isDeleted)
             {
-                UserId = id,
-                Message = "User deleted successfully.",
-            });
+                return NotFound("User not found.");
+            }
+            return Ok("User deleted successfully.");
         }
     }
 }
