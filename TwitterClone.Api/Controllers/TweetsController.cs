@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TwitterClone.Api.Data;
-using TwitterClone.Api.Dtos;
+using TwitterClone.Application.Dtos;
 using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Api.Controllers
