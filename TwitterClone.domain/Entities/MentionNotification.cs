@@ -8,6 +8,10 @@ namespace TwitterClone.Domain.Entities
 {
     public class MentionNotification : Notification
     {
+        private MentionNotification() : base("Mention")
+        {
+        }
+
         public MentionNotification(Guid mentionedByUserId) : base("Mention")
         {
             MentionedByUserId = mentionedByUserId;

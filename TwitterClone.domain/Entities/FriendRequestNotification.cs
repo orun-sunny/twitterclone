@@ -8,6 +8,10 @@ namespace TwitterClone.Domain.Entities
 {
     public sealed class FriendRequestNotification : Notification
     {
+        private FriendRequestNotification() : base("FriendRequest")
+        {
+        }
+
         public FriendRequestNotification(Guid requestedByUserId) : base("FriendRequest")
         {
             RequestedByUserId = requestedByUserId;
