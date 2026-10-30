@@ -20,6 +20,13 @@ namespace TwitterClone.Infrastructure
                 options.UseNpgsql(connectionString));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITweetRepository, TweetRepository>();
+            services.AddScoped<IBookmarkRepository, BookmarkRepository>();
+            services.AddScoped<IFollowRepository, FollowRepository>();
+            services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IRetweetRepository, RetweetRepository>();
 
             return services;
         }

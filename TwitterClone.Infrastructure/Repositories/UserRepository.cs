@@ -7,48 +7,45 @@ namespace TwitterClone.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly TwitterCloneDbContext _context;
-        public UserRepository(
-            TwitterCloneDbContext context)
+
+        public UserRepository(TwitterCloneDbContext context)
         {
             _context = context;
         }
-
-        private readonly List<User> _users = new List<User>();
-
 
         public User AddUser(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
-
             return user;
         }
 
         public User UpdateUser(User user)
         {
-            _users.RemoveAll(u => u.Id == user.Id);
-            _users.Add(user);
+            _context.Users.Update(user);
+            _context.SaveChanges();
             return user;
         }
 
         public bool DeleteUser(User user)
         {
-            return _users.Remove(user);
+            _context.Users.Remove(user);
+            return _context.SaveChanges() > 0;
         }
 
         public User? GetUserById(Guid id)
         {
-            return _users.SingleOrDefault(u => u.Id == id);
+            return _context.Users.SingleOrDefault(u => u.Id == id);
         }
 
         public List<User> GetUsers()
         {
-            return _users.ToList();
+            return _context.Users.ToList();
         }
 
         public User? GetUserByEmail(string email)
         {
-            return _users.SingleOrDefault(u =>
+            return _context.Users.SingleOrDefault(u =>
                 string.Equals(u.Email, email.Trim(), StringComparison.OrdinalIgnoreCase));
         }
     }

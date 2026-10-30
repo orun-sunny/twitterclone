@@ -8,6 +8,10 @@ namespace TwitterClone.Domain.Entities
 {
     public sealed class CommentNotification : Notification
     {
+        private CommentNotification() : base("Comment")
+        {
+        }
+
         public CommentNotification(Guid commentByUserId) : base("Comment")
         {
             CommentByUserId = commentByUserId;
