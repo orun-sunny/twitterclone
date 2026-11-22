@@ -5,7 +5,7 @@ using TwitterClone.Domain.Entities;
 namespace TwitterClone.Application.Services
 {
 
-    public class UserService : IUserService
+    public class UserService : IAuthService
 
 
     {

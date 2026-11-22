@@ -14,9 +14,9 @@ namespace TwitterClone.Api.Controllers
     [Authorize]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IAuthService _userService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IAuthService userService)
         {
             _userService = userService;
         }

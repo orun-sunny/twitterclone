@@ -3,7 +3,7 @@ using TwitterClone.Application.Dtos;
 
 namespace TwitterClone.Application.Interfaces
 {
-    public interface IUserService
+    public interface IAuthService
     {
         UserDto? CreateUser(CreateUserDto createUserDto);
         UserDto? GetUserById(Guid id);
