@@ -1,4 +1,6 @@
-﻿namespace TwitterClone.Domain.Entities
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace TwitterClone.Domain.Entities
 {
     public class User : BaseEntity, IFollowable, INotifiable
     {
@@ -12,6 +14,7 @@
         private string _lastName;
         private string _email;
         private string? _phoneNumber;
+        private string _passwordHash;
 
 
         public string FirstName
@@ -37,6 +40,11 @@
         {
             get { return _phoneNumber; }
             set { _phoneNumber = value; }
+        }
+        public string PasswordHash
+        {
+            get { return _passwordHash; }
+            set { _passwordHash = value; }
         }
 
         private List<Guid> _followers = new List<Guid>();
