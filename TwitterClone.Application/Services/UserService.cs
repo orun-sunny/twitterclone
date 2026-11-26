@@ -1,5 +1,6 @@
 using TwitterClone.Application.Dtos;
 using TwitterClone.Application.Interfaces;
+using TwitterClone.Application.Mappings;
 using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Application.Services
@@ -10,9 +11,14 @@ namespace TwitterClone.Application.Services
 
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IPasswordHasher _passwordHasher;
+
+        public UserService(
+            IUserRepository userRepository,
+            IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
         public UserDto? CreateUser(CreateUserDto createUserDto)
         {
@@ -30,20 +36,16 @@ namespace TwitterClone.Application.Services
                 return null;
             }
 
-            var createUser = _userRepository.AddUser(new User
+            //password hash 
+            var createdUser = _userRepository.AddUser(new User()
             {
-                FirstName = createUserDto.FirstName,
-                LastName = createUserDto.LastName,
-                Email = createUserDto.Email
+                FirstName = createUserDto.FirstName.Trim(),
+                LastName = createUserDto.LastName.Trim(),
+                Email = createUserDto.Email.Trim(),
+                PasswordHash = _passwordHasher.Hash(createUserDto.ToDto(), createUserDto.Password),
             });
 
-            return new UserDto
-            {
-                Id = createUser.Id,
-                FirstName = createUser.FirstName,
-                LastName = createUser.LastName,
-                Email = createUser.Email
-            };
+            return createdUser.ToDto();
         }
 
         public bool DeleteUser(Guid id)
