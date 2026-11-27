@@ -7,6 +7,7 @@ using TwitterClone.Api.Data;
 using TwitterClone.Application;
 using TwitterClone.Infrastructure;
 using TwitterClone.Infrastructure.Auth;
+using TwitterClone.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+
 builder.Services.AddSingleton<JwtSettings>(jwtSettings);
 
 builder.Services
@@ -41,26 +43,14 @@ builder.Services
         };
     });
 
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
-
-builder.Services.AddDbContext<TwitterCloneDbContext>(options =>
-    options.UseNpgsql(connectionString));
-
-builder.Services.AddSingleton<UserRepository>();
-builder.Services.AddSingleton<TweetRepository>();
 
 var app = builder.Build();
 
-PostgresDatabase.EnsureDatabaseExists(connectionString);
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<TwitterCloneDbContext>();
-    db.Database.EnsureCreated();
-}
 
 if (app.Environment.IsDevelopment())
 {
@@ -68,7 +58,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+if (app.Configuration.GetValue<bool>("Database:ApplyMigrationsOnStartup"))
+{
+    using var scope = app.Services.CreateScope();
+    await scope.ServiceProvider.GetRequiredService<TwitterCloneDbContext>().Database.MigrateAsync();
+}
+
 app.UseHttpsRedirection();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

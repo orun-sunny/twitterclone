@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TwitterClone.Api.Data;
 using TwitterClone.Application.Dtos;
 using TwitterClone.Domain.Entities;
+using TwitterClone.Infrastructure.Persistence;
 
 namespace TwitterClone.Api.Controllers
 {
