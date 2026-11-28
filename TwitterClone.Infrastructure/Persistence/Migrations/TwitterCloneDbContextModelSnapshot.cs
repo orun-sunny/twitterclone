@@ -240,8 +240,7 @@ namespace TwitterClone.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -260,7 +259,9 @@ namespace TwitterClone.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tweets");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("tweets", (string)null);
                 });
 
             modelBuilder.Entity("TwitterClone.Domain.Entities.User", b =>
@@ -298,7 +299,6 @@ namespace TwitterClone.Infrastructure.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -354,6 +354,17 @@ namespace TwitterClone.Infrastructure.Persistence.Migrations
                     b.HasBaseType("TwitterClone.Domain.Entities.Notification");
 
                     b.HasDiscriminator().HasValue("System");
+                });
+
+            modelBuilder.Entity("TwitterClone.Domain.Entities.Tweet", b =>
+                {
+                    b.HasOne("TwitterClone.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,45 +8,58 @@ namespace TwitterClone.Infrastructure.Repositories
     {
         private readonly TwitterCloneDbContext _context;
 
-        public UserRepository(TwitterCloneDbContext context)
+        public UserRepository(
+            TwitterCloneDbContext context)
         {
             _context = context;
         }
+
+        private readonly List<User> _users = new List<User>();
 
         public User AddUser(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
+
             return user;
         }
 
         public User UpdateUser(User user)
         {
-            _context.Users.Update(user);
-            _context.SaveChanges();
+            _users.RemoveAll(u => u.Id == user.Id);
+            _users.Add(user);
             return user;
         }
 
         public bool DeleteUser(User user)
         {
-            _context.Users.Remove(user);
-            return _context.SaveChanges() > 0;
+            return _users.Remove(user);
         }
 
         public User? GetUserById(Guid id)
         {
-            return _context.Users.SingleOrDefault(u => u.Id == id);
+            return _users.SingleOrDefault(u => u.Id == id);
         }
 
         public List<User> GetUsers()
         {
-            return _context.Users.ToList();
+            return _users.ToList();
         }
 
         public User? GetUserByEmail(string email)
         {
-            return _context.Users.SingleOrDefault(u =>
-                string.Equals(u.Email, email.Trim(), StringComparison.OrdinalIgnoreCase));
+            return _context.Users.SingleOrDefault(u => u.Email == email);
         }
+        //public void AddUserRole(UserRole userRole)
+        //{
+        //    _context.UserRoles.Add(userRole);
+        //    _context.SaveChanges();
+        //}
+
+        //public void RemoveUserRole(UserRole userRole)
+        //{
+        //    _context.UserRoles.Remove(userRole);
+        //    _context.SaveChanges();
+        //}
     }
 }
