@@ -42,6 +42,7 @@ namespace TwitterClone.Application.Services
                 FirstName = createUserDto.FirstName.Trim(),
                 LastName = createUserDto.LastName.Trim(),
                 Email = createUserDto.Email.Trim(),
+                Username = createUserDto.Username.Trim(),
                 PasswordHash = _passwordHasher.Hash(createUserDto.ToDto(), createUserDto.Password),
             });
 
@@ -85,6 +86,10 @@ namespace TwitterClone.Application.Services
 
             user.FirstName = updateUserDto.FirstName.Trim();
             user.LastName = updateUserDto.LastName.Trim();
+            user.Username = updateUserDto.Username.Trim();
+            user.Bio = updateUserDto.Bio.Trim();
+            user.AvatarUrl = updateUserDto.AvatarUrl?.Trim();
+     
 
 
             _userRepository.UpdateUser(user);

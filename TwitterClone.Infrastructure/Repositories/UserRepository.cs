@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TwitterClone.Application.Interfaces;
 using TwitterClone.Domain.Entities;
 using TwitterClone.Infrastructure.Persistence;
@@ -48,7 +49,10 @@ namespace TwitterClone.Infrastructure.Repositories
 
         public User? GetUserByEmail(string email)
         {
-            return _context.Users.SingleOrDefault(u => u.Email == email);
+            var normalizedEmail = email.Trim();
+
+            return _context.Users
+                .SingleOrDefault(u => EF.Functions.ILike(u.Email, normalizedEmail));
         }
         //public void AddUserRole(UserRole userRole)
         //{

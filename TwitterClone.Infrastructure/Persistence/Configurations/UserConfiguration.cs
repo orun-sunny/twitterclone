@@ -13,7 +13,13 @@ namespace TwitterClone.Infrastructure.Persistence.Configurations
             builder.Property(u =>u.LastName).IsRequired();
             builder.Property(u =>u.Email).IsRequired();
             builder.Property(u =>u.PhoneNumber ).IsRequired(false);
-            builder.HasIndex(u=>u.Email).IsUnique();
+         
+
+            builder.Property(u => u.Username).IsRequired().HasMaxLength(15);
+            builder.Property(u => u.Bio).HasMaxLength(160);
+            builder.Property(u => u.AvatarUrl).HasMaxLength(200);
+
+            builder.HasIndex(u => u.Email).IsUnique();
 
         }
     }
